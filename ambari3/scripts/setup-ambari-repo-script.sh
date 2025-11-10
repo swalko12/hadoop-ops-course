@@ -29,11 +29,3 @@ EOF
 
 systemctl start nginx
 systemctl enable nginx
-
-tee /etc/yum.repos.d/ambari.repo << EOF
-[ambari]
-name=Ambari Repository
-baseurl=http://bigtop_hostname0
-gpgcheck=0
-enabled=1
-EOF

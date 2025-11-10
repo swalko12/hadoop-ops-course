@@ -2,6 +2,15 @@
 
 set -ex
 
+# setup yum repo
+tee /etc/yum.repos.d/ambari.repo << EOF
+[ambari]
+name=Ambari Repository
+baseurl=http://bigtop_hostname0
+gpgcheck=0
+enabled=1
+EOF
+
 # ambari agent
 yum install -y python3-distro
 yum install -y java-17-openjdk-devel
