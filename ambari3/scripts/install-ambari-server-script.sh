@@ -30,6 +30,8 @@ yum -y install mysql-server
 rm -rf /var/lib/mysql/*
 mysqld --initialize
 chown -R mysql:mysql /var/lib/mysql
+touch /var/log/mysql/mysql.log
+chown -R mysql:mysql /var/log/mysql/
 
 MYSQL_ROOT_PASS=$(tac /var/log/mysql/mysqld.log |grep -m1 -i 'password is generated' |rev |cut -d ':' -f1 |rev |sed 's/\ //g')
 
