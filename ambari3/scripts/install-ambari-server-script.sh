@@ -31,7 +31,7 @@ rm -rf /var/lib/mysql/*
 mysqld --initialize
 chown -R mysql:mysql /var/lib/mysql
 
-MYSQL_ROOT_PASS=$(cat /var/log/mysql/mysqld.log |grep -i 'password is generated' |rev |cut -d ':' -f1 |rev |sed 's/\ //g')
+MYSQL_ROOT_PASS=$(tac /var/log/mysql/mysqld.log |grep -m1 -i 'password is generated' |rev |cut -d ':' -f1 |rev |sed 's/\ //g')
 
 echo 'bind-address=0.0.0.0' >> /etc/my.cnf.d/mysql-server.cnf
 
