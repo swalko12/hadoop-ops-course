@@ -9,7 +9,7 @@ services:
     mem_limit: 8g
     mem_swappiness: 0
     ports:
-      - "9090:8080"
+      - "8080:8080"
     privileged: true
     volumes:
       - ./ambari-repo:/var/repo/ambari
