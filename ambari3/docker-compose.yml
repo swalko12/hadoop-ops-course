@@ -2,7 +2,7 @@
 services:
   bigtop_hostname0:
     command: /sbin/init
-    hostname: bigtop_hostname0
+    hostname: bigtop-hostname0
     container_name: bigtop_hostname0
     domainname: bigtop.apache.org
     image: bigtop/puppet:trunk-rockylinux-8
@@ -17,7 +17,7 @@ services:
 
   bigtop_hostname1:
     command: /sbin/init
-    hostname: bigtop_hostname1
+    hostname: bigtop-hostname1
     domainname: bigtop.apache.org
     container_name: bigtop_hostname1
     image: bigtop/puppet:trunk-rockylinux-8
@@ -30,7 +30,7 @@ services:
 
   bigtop_hostname2:
     command: /sbin/init
-    hostname: bigtop_hostname2
+    hostname: bigtop-hostname2
     domainname: bigtop.apache.org
     container_name: bigtop_hostname2
     image: bigtop/puppet:trunk-rockylinux-8
@@ -43,7 +43,7 @@ services:
 
   bigtop_hostname3:
     command: /sbin/init
-    hostname: bigtop_hostname3
+    hostname: bigtop-hostname3
     domainname: bigtop.apache.org
     container_name: bigtop_hostname3
     image: bigtop/puppet:trunk-rockylinux-8

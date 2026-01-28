@@ -6,7 +6,7 @@ set -ex
 tee /etc/yum.repos.d/ambari.repo << EOF
 [ambari]
 name=Ambari Repository
-baseurl=http://bigtop_hostname0
+baseurl=http://bigtop-hostname0
 gpgcheck=0
 enabled=1
 EOF
