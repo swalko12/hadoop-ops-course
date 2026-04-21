@@ -18,7 +18,7 @@ dnf install nginx -y
 sudo tee /etc/nginx/conf.d/ambari-repo.conf << EOF
 server {
     listen 80;
-    server_name bigtop-hostname0 bigtop-hostname0.demo.local;
+    server_name bigtop-hostname0 bigtop-hostname0.${DOMAIN};
     root /var/repo/ambari;
     autoindex on;
     location / {

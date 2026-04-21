@@ -13,11 +13,11 @@ echo '127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdom
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 ' > hosts
 for i in $INSTANCES ; do
-	docker compose exec -it $i yum install net-tools -y
-	docker compose cp getip.sh $i:/root/getip.sh
-	IP=$(docker compose exec -it $i /bin/bash /root/getip.sh)
-	HOSTNAME=$(docker compose exec -it $i hostname)
-	HOSTNAME_SHORT=$(docker compose exec -it $i hostname -f)
+	${CMD} exec -it $i yum install net-tools -y
+	${CMD} cp getip.sh $i:/root/getip.sh
+	IP=$(${CMD} exec -it $i /bin/bash /root/getip.sh | tr -d '\r')
+	HOSTNAME=$(${CMD} exec -it $i hostname | tr -d '\r')
+	HOSTNAME_SHORT=$(${CMD} exec -it $i hostname -f | tr -d '\r')
 	echo "$IP $HOSTNAME_SHORT $HOSTNAME" >> hosts
 done
 

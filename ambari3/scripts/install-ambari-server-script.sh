@@ -12,18 +12,14 @@ enabled=1
 EOF
 
 # ambari agent
-yum install -y python3-distro
-yum install -y java-17-openjdk-devel
-yum install -y java-1.8.0-openjdk-devel
-yum install -y ambari-agent
+yum install -y python3-distro  java-17-openjdk-devel  java-1.8.0-openjdk-devel ambari-agent
 
 # ambari server
-yum install -y python3-psycopg2
-yum install -y ambari-server
+yum install -y python3-psycopg2 ambari-server
 
 
 # MySQL
-yum -y install https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm
+#yum -y install https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm
 
 yum -y install mysql-server
 
@@ -42,8 +38,8 @@ systemctl enable mysqld.service
 
 echo "
 ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'ambarirootpass';
-CREATE USER 'root'@'%.demo.local' IDENTIFIED WITH caching_sha2_password BY 'ambarirootpass';
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.demo.local';
+CREATE USER 'root'@'%.${DOMAIN}' IDENTIFIED WITH caching_sha2_password BY 'ambarirootpass';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.${DOMAIN}';
 -- Create Ambari user and grant privileges
 CREATE USER 'ambari'@'localhost' IDENTIFIED BY 'ambari';
 GRANT ALL PRIVILEGES ON *.* TO 'ambari'@'localhost';
@@ -91,6 +87,4 @@ ambari-server setup -s \
   --databaseusername=ambari \
   --databasepassword=ambari
 
-
 ambari-server start
-

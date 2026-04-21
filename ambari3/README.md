@@ -3,8 +3,13 @@
 Clone this repository first and cd into the ambari3 directory.
 
 ## Start the containers
+### Docker
 ```
 docker compose up -d
+```
+### Podman
+```
+podman-compose up -d
 ```
 
 The next commands will run from the `scripts/` directory in `ambari3/`
@@ -37,8 +42,9 @@ Also when you restart the containers and they have new IP addresses, update the 
 ```
 
 ## Setup Cluster
-You can now login to http://localhost:8080 (login & password are admin) to setup the cluster
+You can now log in to http://localhost:8080 (login & password are admin) to set up the cluster
 
 ### Configuration
-* When asked for the baseURL, supply http://bigtop-hostname0.demo.local. Your OS is Redhat 8 based.
-* When asked for installation nodes, list all nodes: bigtop-hostname0.demo.local bigtop-hostname1.demo.local bigtop-hostname2.demo.local bigtop-hostname3.demo.local
+* When asked for the baseURL, supply http://bigtop-hostname0.demo.local for docker or http://bigtop-hostname0.dns.podman for podman. Your OS is Redhat 8/9 based.
+* When asked for installation nodes, list all nodes: bigtop-hostname0.demo.local bigtop-hostname1.demo.local bigtop-hostname2.demo.local bigtop-hostname3.demo.local for docker or
+  bigtop-hostname0.dns.podman bigtop-hostname1.dns.podman bigtop-hostname2.dns.podman bigtop-hostname3.dns.podman for podman
