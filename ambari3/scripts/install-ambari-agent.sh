@@ -2,7 +2,7 @@
 
 set -ex
 
-source ./profile.sh
+source ../.env
 
 INSTANCES="bigtop_hostname0 bigtop_hostname1 bigtop_hostname2 bigtop_hostname3"
 

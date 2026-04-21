@@ -2,6 +2,8 @@
 
 set -ex
 
+source ../.env
+
 INSTANCES="bigtop_hostname0 bigtop_hostname1 bigtop_hostname2 bigtop_hostname3"
 INSTANCES_WITHOUT_0="bigtop_hostname1 bigtop_hostname2 bigtop_hostname3"
 
@@ -12,15 +14,30 @@ for i in $INSTANCES ; do
 	fi
 done
 
+if [[ ${ROCKY_VERSION} -eq 9 ]]; then
+  DEVEL_REPO="rocky-devel"
+  POWERTOOLS_REPO="crb"
+  SWAP="true"
+else
+  DEVEL_REPO="Rocky-Devel"
+  POWERTOOLS_REPO="powertools"
+  SWAP="false"
+fi
+
 for i in $INSTANCES ; do
+  if ${SWAP}; then
+    # rock9 'minimal' replacement
+    ${CMD} exec -it $i dnf swap -y libcurl-minimal libcurl
+    ${CMD} exec -it $i dnf swap -y curl-minimal curl
+	fi
 	${CMD} exec -it $i dnf install -y sudo openssh-server openssh-clients which iproute net-tools less vim-enhanced initscripts wget curl tar unzip git dnf-plugins-core
-	${CMD} exec -it $i dnf config-manager --set-enabled powertools
+	${CMD} exec -it $i dnf config-manager --set-enabled ${POWERTOOLS_REPO}
 	${CMD} exec -it $i dnf update -y || echo "update failed, but continuing"
 done
 
 for i in $INSTANCES ; do
 	${CMD} exec -it $i ssh-keygen -t rsa -N "" -f /root/.ssh/id_rsa
-	
+
 	# Start SSH service
 	${CMD} exec -it $i systemctl enable sshd
 	${CMD} exec -it $i systemctl start sshd
@@ -28,7 +45,7 @@ done
 
 for i in $INSTANCES ; do
 	${CMD} exec -it $i setenforce 0 || echo "selinux is disabled"
-	${CMD} exec -it $i sed -i 's/enabled=0/enabled=1/g' /etc/yum.repos.d/Rocky-Devel.repo
+	${CMD} exec -it $i sed -i 's/enabled=0/enabled=1/g' /etc/yum.repos.d/${DEVEL_REPO}.repo
 done
 
 ${CMD} cp bigtop_hostname0:/root/.ssh/id_rsa.pub bigtop_hostname0.pub

@@ -5,8 +5,8 @@ services:
     hostname: bigtop-hostname0
     container_name: bigtop_hostname0
     domainname: bigtop.apache.org
-    image: bigtop/puppet:trunk-rockylinux-8
-    mem_limit: 8g
+    image: bigtop/puppet:trunk-rockylinux-${ROCKY_VERSION}
+    mem_limit: 12g
     mem_swappiness: 0
     ports:
       - "8080:8080"
@@ -20,8 +20,8 @@ services:
     hostname: bigtop-hostname1
     domainname: bigtop.apache.org
     container_name: bigtop_hostname1
-    image: bigtop/puppet:trunk-rockylinux-8
-    mem_limit: 8g
+    image: bigtop/puppet:trunk-rockylinux-${ROCKY_VERSION}
+    mem_limit: 12g
     mem_swappiness: 0
     privileged: true
     volumes:
@@ -33,8 +33,8 @@ services:
     hostname: bigtop-hostname2
     domainname: bigtop.apache.org
     container_name: bigtop_hostname2
-    image: bigtop/puppet:trunk-rockylinux-8
-    mem_limit: 8g
+    image: bigtop/puppet:trunk-rockylinux-${ROCKY_VERSION}
+    mem_limit: 12g
     mem_swappiness: 0
     privileged: true
     volumes:
@@ -46,8 +46,8 @@ services:
     hostname: bigtop-hostname3
     domainname: bigtop.apache.org
     container_name: bigtop_hostname3
-    image: bigtop/puppet:trunk-rockylinux-8
-    mem_limit: 8g
+    image: bigtop/puppet:trunk-rockylinux-${ROCKY_VERSION}
+    mem_limit: 12g
     mem_swappiness: 0
     privileged: true
     volumes:
